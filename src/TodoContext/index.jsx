@@ -5,7 +5,7 @@ const TodoContext = React.createContext();
 
 function TodoProvider(props) {
   const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage(
-    "TODOS_V1",
+    "LISTA",
     []
   );
 
