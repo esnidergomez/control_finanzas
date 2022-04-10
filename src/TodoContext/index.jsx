@@ -5,7 +5,7 @@ const TodoContext = React.createContext();
 
 function TodoProvider(props) {
   const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage(
-    "LISTA",
+    "TODOS_V1",
     []
   );
 
@@ -14,6 +14,9 @@ function TodoProvider(props) {
 
   //Modal
   const [openModal, setOpenModal] = React.useState(false);
+
+  //modalidad
+  const [modalidad, setModalidad] = React.useState("");
 
   const completedTodos = todos.filter((todo) => todo.completed).length;
   const totalTodos = todos.length;
@@ -31,11 +34,12 @@ function TodoProvider(props) {
   }
 
   //Agregar
-  const addTodo = (text) => {
+  const addTodo = (text, monto) => {
     const newTodos = [...todos];
     newTodos.push({
       completed: false,
-      text
+      text,
+      monto
     });
     saveTodos(newTodos);
   };
@@ -70,7 +74,9 @@ function TodoProvider(props) {
         completeTodo,
         deleteTodo,
         openModal,
-        setOpenModal
+        setOpenModal,
+        modalidad,
+        setModalidad
       }}
     >
       {props.children}
